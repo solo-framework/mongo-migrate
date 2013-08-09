@@ -14,5 +14,10 @@
     "support": {
         "issues": "https://github.com/emerleite/mongo-migrate/issues"
     },
-    "bin": ["./mongo_migrate"]
+    "bin": ["./mongo_migrate"],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
 }
