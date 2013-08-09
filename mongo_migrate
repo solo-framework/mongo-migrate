@@ -200,7 +200,7 @@ echo $CONFIG_PATH;
 
 
 #load custom configs (overrides defaults)
-source $CONFIG_PATH
+. $CONFIG_PATH
 
 #ensure trailing slash on MIGRATION_DIR
 MIGRATION_DIR=${MIGRATION_DIR%/}/
@@ -222,11 +222,3 @@ else
 fi
 
 exit 0
-
-
-
-
-
-
-
-
