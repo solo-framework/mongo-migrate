@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ### BEGIN INFO
 # Provides:          Mongodb migration manager
@@ -76,7 +76,7 @@ check_migration() {
 generate() {
     echo "Generating migration ${1}"
     local file=`generate_migration_file_name ${1}`
-    cp template/migration_template.js $MIGRATION_DIR$file
+    cp $INSTALL_DIR/template/migration_template.js $MIGRATION_DIR$file
     echo "Migration ${MIGRATION_DIR}${file} generated"
 }
 
@@ -161,6 +161,16 @@ run_all() {
 
 ## SCRIPT RUN
 
+# Environment-settings
+# set INSTALL_DIR
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$INSTALL_DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
 #Convention configs
 MONGO_HOST=localhost
 MIGRATION_DIR="db/migrate/"
@@ -185,6 +195,10 @@ while getopts "hf:c:t:gr" OPT; do
 
 [ -n "$RUN" -a "$TARGET" != "up" -a "$TARGET" != "down" ] && usage
 
+
+echo $CONFIG_PATH;
+
+
 #load custom configs (overrides defaults)
 source $CONFIG_PATH
 
@@ -208,4 +222,11 @@ else
 fi
 
 exit 0
+
+
+
+
+
+
+
 
