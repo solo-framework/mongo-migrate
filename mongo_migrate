@@ -111,11 +111,11 @@ run_migration() {
 }
 
 get_current_migration() {
-    echo "`mongo $MONGO_HOST/$MONGO_DATABASE -u $MONGO_USR -p $MONGO_PWD --quiet ./get_current.js`"
+    echo "`mongo $MONGO_HOST/$MONGO_DATABASE -u $MONGO_USR -p $MONGO_PWD --quiet $INSTALL_DIR/get_current.js`"
 }
 
 update_current_migration() {
-    mongo $MONGO_HOST/$MONGO_DATABASE -u $MONGO_USR -p $MONGO_PWD --quiet --eval "current='${1}'" ./update_current.js
+    mongo $MONGO_HOST/$MONGO_DATABASE -u $MONGO_USR -p $MONGO_PWD --quiet --eval "current='${1}'" $INSTALL_DIR/update_current.js
 }
 
 all_up() {
