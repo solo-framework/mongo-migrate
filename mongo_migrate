@@ -208,6 +208,16 @@ MIGRATION_DIR=${MIGRATION_DIR%/}/
 #Check migration dir
 ensure_migration_dir
 
+#Construct authentication phrase
+auth=""
+if [ $MONGO_USR ]; then
+	auth="$auth -u $MONGO_USR "
+fi
+
+if [ $MONGO_PWD ]; then
+	auth="$auth -p $MONGO_PWD "
+fi
+
 # Script running flow
 if [ $GENERATE ]; then
     generate $FILE_NAME
