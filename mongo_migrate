@@ -52,7 +52,7 @@ get_migration_file_name() {
     then
       echo $MIGRATION_DIR$1
     else
-      echo "$MIGRATION_DIR$(find ./$MIGRATION_DIR -name '[0-9]*' |grep --color=never _$1.js |awk -F/ '{print $NF}')"
+      echo "$MIGRATION_DIR$(find $MIGRATION_DIR -name '[0-9]*' |grep --color=never _$1.js |awk -F/ '{print $NF}')"
     fi
 }
 
