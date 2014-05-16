@@ -84,6 +84,7 @@ run_migration() {
     local name=$1
     local target=$2
 
+	echo "==========================================="
     echo "running migration ${name} ${target}\n"
     ensure_installed mongo
     ensure_database
@@ -105,9 +106,9 @@ run_migration() {
     local migration_name="$(echo $file |awk -F/ '{print $NF}')"
     local migration_time="$(echo $migration_name |cut -d_ -f1 |bc)"
 
-    update_current_migration `echo "$migration_time$inc"|bc`
+    update_current_migration `echo "$migration_time$inc"|bc` $migration_name
 
-    echo "Migration ${name} ${target} executed\n"
+    echo "Migration ${name} ${target} has been executed"
 }
 
 get_current_migration() {
@@ -115,7 +116,7 @@ get_current_migration() {
 }
 
 update_current_migration() {
-    mongo $MONGO_HOST/$MONGO_DATABASE $auth --quiet --eval "current='${1}'" $INSTALL_DIR/update_current.js
+    mongo $MONGO_HOST/$MONGO_DATABASE $auth --quiet --eval "current='${1}';comment='${2}'" $INSTALL_DIR/update_current.js
 }
 
 all_up() {
