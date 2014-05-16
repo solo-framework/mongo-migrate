@@ -1,10 +1,12 @@
 var migration = {
-  up: function() {
+	up: function() 
+	{
 
-  },
-  down: function() {
+	},
+	down: function() 
+	{
 
-  }
+	}
 };
 
 migration[target].call();
